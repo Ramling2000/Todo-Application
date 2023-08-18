@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>SignUp page</h1>
+	<h3>Enter Details Below</h3>
+	<form action="signup" method="post" autocomplete="on">
+		<fieldset>
+
+			<table>
+				<tr>
+					<th><label>Name</label></th>
+					<th><input type="text" name="name"></th>
+				</tr>
+				<tr>
+					<th><label>Email</label></th>
+					<th><input type="email" name="email" required="required"></th>
+				</tr>
+				<tr>
+					<th><label>Mobile</label></th>
+					<th><input type="number" name="mobile" required="required"></th>
+				</tr>
+				<tr>
+					<th><label>Gender</label></th>
+					<th><input type="radio" id="gen" name="gender" value="Male">Male
+						<input type="radio" id="gen" name="gender" value="Female">Female
+					</th>
+				</tr>
+				<tr>
+					<th><label>Date of Birth</label></th>
+					<th><input type="date" name="dob" required="required">
+					</th>
+				</tr>
+				<tr>
+					<th><label>Address</label></th>
+					<th><textarea rows="5" cols="30" name="address"></textarea></th>
+				</tr>
+				<tr>
+					<th><label>Password</label></th>
+					<th><input type="password" name="password" required="required">
+					</th>
+				</tr>
+				<tr>
+					<th><label>know language</label></th>
+					<th><input type="checkbox" id="co" name="language"
+						value="html">HTML <input type="checkbox" id="co"
+						name="language" value="css">CSS <input type="checkbox"
+						id="co" name="language" value="javascript">JavaScript</th>
+				</tr>
+				<tr>
+					<th>
+						<button>SignUp</button>
+					</th>
+					<th>
+						<button>Cancel</button>
+					</th>
+				</tr>
+			</table>
+
+		</fieldset>
+	</form>
+	<br>
+	<a href="Login.html"><button>Already Have Account? Click
+			here to Login</button></a>
+
+</body>
+</html>
