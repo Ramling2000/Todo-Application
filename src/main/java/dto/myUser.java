@@ -28,7 +28,5 @@ public class myUser {
 	String password;
 	@OneToMany
     List<Task>list;
-	
-	
-	
+		
 }

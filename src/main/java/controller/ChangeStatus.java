@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.User;
-
 import dao.UserDao;
 import dto.Task;
 import dto.myUser;
@@ -19,7 +17,7 @@ public class ChangeStatus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     myUser user =(myUser) req.getSession().getAttribute("user");
-    	if("user"==null) 
+    	if(user==null) 
     	{
     		resp.getWriter().print("<h1 style='color:red'>Session Expired, Login Again</h1>");
     		req.getRequestDispatcher("Login.html").include(req, resp);
@@ -27,21 +25,29 @@ public class ChangeStatus extends HttpServlet {
     	else {
     	int id=Integer.parseInt(req.getParameter("id"));
    	   UserDao dao=new UserDao();
-   	   Task t=dao.fetchAllTask(id);
+   	   Task t=dao.fetchTask(id);
    	   
+   	   if(t==null) {
+   		resp.getWriter().print("<h1 style='color:red'>Session Expired, Login Again</h1>");
+		req.getRequestDispatcher("Login.html").include(req, resp);
+   	   }
+   	   
+   	   else {
    	   if(t.isStatus())
    		   t.setStatus(false);
    	   else
    		   t.setStatus(true);
+   	   
    	   dao.update(t);
    	   
-   	 myUser  user1=dao.findByEmail(user.getEmail());
-   	   req.getSession().setAttribute("user", user1);
+   	 myUser  user2=dao.fetchByEmail(user.getEmail());
+   	   req.getSession().setAttribute("user", user2);
    			   
    	   resp.getWriter().print("<h1 style='color:green'>status changed Succefully</h1>");
-   	        req.setAttribute("list", user1.getList());
+   	        req.setAttribute("list", user2.getList());
 
    	   req.getRequestDispatcher("Home.jsp").include(req, resp);
     }
     }
+}
 }

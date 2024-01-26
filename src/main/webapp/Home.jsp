@@ -20,11 +20,9 @@ body {
 
     <center>
     <body>
+    <h1>Welcome to Todo Home</h1>
 	<%-- This is Receiving the values from Servlet --%>
 
-	<%
-	List<Task> list = (List<Task>) request.getAttribute("list");
-	%>
 	
              
 	<table border="1">
@@ -40,6 +38,8 @@ body {
 			<th>Update</th>
 		</tr>
 		<%
+		List<Task> list = (List<Task>) request.getAttribute("list");
+		
 		for (Task t : list) {
 		%>
 		<%--Printing value if it ExistsS --%>
@@ -50,10 +50,15 @@ body {
 			<td><%=t.getDescription()%></td>
 			<td><%=t.getTaskDate()%></td>
 			<td><%=t.getCompletionDate()%></td>
-			<td><%if (t.isStatus())%>Completed<%else%>Not completed</td>
+			
+			<td>
+			     <%
+			     if (t.isStatus())
+			     %>Completed<%else%>Not completed
+			</td>
 			<td><a href="changestatus?id=<%=t.getId()%>"><button>Change</button></a></td>
 			<td><a href="delete?id=<%=t.getId()%>"><button>Delete</button></a></td>
-			<td><a href="update?id=<%=t.getId()%>"><button>Update</button></a></td>
+			<td><a href="edittask?id=<%=t.getId()%>"><button>Update</button></a></td>
 		</tr>
 		<%
 		}

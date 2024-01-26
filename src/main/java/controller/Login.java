@@ -23,7 +23,7 @@ public class Login extends HttpServlet {
 		String password = req.getParameter("password");
 
 		UserDao dao = new UserDao();
-		myUser user = dao.findByEmail(email);
+		myUser user = dao.fetchByEmail(email);
 
 		if (user == null) {
 			resp.getWriter().print("<h1>Incorrect Email</n1>");
@@ -31,16 +31,20 @@ public class Login extends HttpServlet {
 		} else {
 			if (user.getPassword().equals(password)) 
 			{
+				//Setting session
+
 				req.getSession().setAttribute("user", user);
 				req.getSession().setMaxInactiveInterval(60);
 				
-				resp.getWriter().print("<h1>Login Successfully</h1>");
-				List<Task>list=user.getList();
-				req.setAttribute("list", list);
+				resp.getWriter().print("<h1style='color:green'>Login Successfully</h1>");
+//				List<Task>list=user.getList();
+				
+				//Carrying values to Home Page
+				req.setAttribute("list", user.getList());
 				req.getRequestDispatcher("Home.jsp").include(req, resp);
 				
 			} else {
-				resp.getWriter().print("<h1>Incorrect password</h1>");
+				resp.getWriter().print("<h1 style='color:red'>Incorrect password</h1>");
 				req.getRequestDispatcher("Login.html").include(req, resp);
 			}
 		}

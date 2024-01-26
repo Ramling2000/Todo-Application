@@ -21,7 +21,7 @@ public class UserDao {
 		transaction.commit();
 	}
 
-	public myUser findByEmail(String email) {
+	public myUser fetchByEmail(String email) {
 		List<myUser> list = manager.createQuery("select x from myUser x where email=?1").setParameter(1, email)
 				// .createNativeQuery("select* from myUser where email=".myUser.class)
 				.getResultList();
@@ -43,21 +43,21 @@ public class UserDao {
 	public void update(myUser user) 
 	{
 		transaction.begin();
-		manager.persist(user);
+		manager.merge(user);
 		transaction.commit();
 	}
-	public Task fetchAllTask(int id) {
+	public Task fetchTask(int id) {
 		return manager.find(Task.class,id);
 	}
 	public void update(Task t) {
 		transaction.begin();
-		manager.persist(t);
+		manager.merge(t);
 		transaction.commit();
 	}
 	
-	public void delete(Task t) {
+	public void remove(Task t) {
 		transaction.begin();
-		manager.persist(t);
+		manager.remove(t);
 		transaction.commit();
 	}
 //	
